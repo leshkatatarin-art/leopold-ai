@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101522">
+<title>ЛеопольдИИ</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#101522;color:#f4f6fb;
+ font-family:Arial,sans-serif;min-height:100vh;
+ display:flex;justify-content:center
+}
+.app{width:100%;max-width:850px;padding:22px;display:flex;flex-direction:column;min-height:100vh}
+header{display:flex;align-items:center;gap:13px;padding:12px 0;border-bottom:1px solid #293247}
+.logo{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,#3989ff,#8b5cf6);display:grid;place-items:center;font-size:26px}
+h1{font-size:23px;margin:0}
+.status{color:#8da0bd;font-size:12px;margin-top:5px}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:35px 0}
+.welcome{font-size:30px;margin:0 0 12px}
+.sub{color:#9eabc1;line-height:1.5}
+.chat{width:100%;display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
+.message{padding:14px 16px;border-radius:16px;max-width:90%;line-height:1.5;white-space:pre-wrap}
+.user{background:#2858a5;align-self:flex-end}
+.bot{background:#202b40;align-self:flex-start}
+form{display:flex;gap:10px;background:#202b40;padding:10px;border-radius:18px}
+input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:white;font-size:16px;padding:10px}
+button{border:0;border-radius:12px;background:#4387f5;color:white;padding:12px 17px;font-size:15px;cursor:pointer}
+footer{text-align:center;color:#72819b;font-size:11px;padding:15px}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<div class="logo">Л</div>
+<div>
+<h1>ЛеопольдИИ</h1>
+<div class="status">● Персональный ИИ-помощник</div>
+</div>
+</header>
+<main id="welcome">
+<div style="font-size:55px">🤖</div>
+<h2 class="welcome">Привет! Я ЛеопольдИИ</h2>
+<p class="sub">Твой собственный искусственный интеллект.<br>Скоро здесь появятся новые возможности!</p>
+</main>
+<section class="chat" id="chat"></section>
+<form id="form">
+<input id="prompt" placeholder="Напиши сообщение..." autocomplete="off">
+<button type="submit">➤</button>
+</form>
+<footer>ЛеопольдИИ · Версия 0.1 · Собственный проект</footer>
+</div>
+<script>
+const form=document.getElementById('form');
+const input=document.getElementById('prompt');
+const chat=document.getElementById('chat');
+const welcome=document.getElementById('welcome');
+form.addEventListener('submit',function(e){
+ e.preventDefault();
+ const value=input.value.trim();
+ if(!value)return;
+ welcome.style.display='none';
+ const user=document.createElement('div');
+ user.className='message user';
+ user.textContent=value;
+ chat.appendChild(user);
+ const bot=document.createElement('div');
+ bot.className='message bot';
+ bot.textContent='Сообщение получено! Мой интеллект пока не подключён. Это следующий этап нашего проекта.';
+ chat.appendChild(bot);
+ input.value='';
+});
+</script>
+</body>
+  </html>
