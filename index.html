@@ -72,5 +72,30 @@ form.addEventListener('submit',function(e){
  input.value='';
 });
 </script>
+
+<script>
+const LEOPOLD_SERVER =
+  "https://leopold-ai-server.leshkatatarin.workers.dev";
+
+async function askLeopold(message) {
+  const response = await fetch(LEOPOLD_SERVER, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: message
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Ошибка сервера");
+  }
+
+  return data.answer;
+}
+</script>
 </body>
   </html>
