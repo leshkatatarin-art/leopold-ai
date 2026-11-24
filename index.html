@@ -56,21 +56,37 @@ const form=document.getElementById('form');
 const input=document.getElementById('prompt');
 const chat=document.getElementById('chat');
 const welcome=document.getElementById('welcome');
-form.addEventListener('submit',function(e){
+
+form.addEventListener('submit', async function(e) {
  e.preventDefault();
- const value=input.value.trim();
- if(!value)return;
- welcome.style.display='none';
- const user=document.createElement('div');
- user.className='message user';
- user.textContent=value;
+
+ const value = input.value.trim();
+ if (!value) return;
+
+ welcome.style.display = 'none';
+
+ const user = document.createElement('div');
+ user.className = 'message user';
+ user.textContent = value;
  chat.appendChild(user);
- const bot=document.createElement('div');
- bot.className='message bot';
- bot.textContent='Сообщение получено! Мой интеллект пока не подключён. Это следующий этап нашего проекта.';
+
+ const bot = document.createElement('div');
+ bot.className = 'message bot';
+ bot.textContent = 'ЛеопольдИИ думает...';
  chat.appendChild(bot);
- input.value='';
+
+ input.value = '';
+
+ try {
+   const answer = await askLeopold(value);
+   bot.textContent = answer;
+ } catch (error) {
+   bot.textContent = 'Не удалось получить ответ: ' + error.message;
+ }
+
+ chat.scrollTop = chat.scrollHeight;
 });
+
 </script>
 
 <script>
